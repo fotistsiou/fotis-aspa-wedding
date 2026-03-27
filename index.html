@@ -8,6 +8,8 @@
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <!-- Tailwind Custom Colors -->
     <script>
       tailwind.config = {
@@ -73,15 +75,58 @@
                     ΤΟΠΟΘΕΣΙΑ
                 </a>
 
-                <!-- MEMORIES -->
-                <a 
-                    class="w-full py-3 rounded-lg font-medium shadow bg-weddingButton text-weddingText hover:bg-weddingButtonHover transition"
-                    id="memories"
-                    href="#"
-                    target="_blank"
+                <!-- MEMORIES with countdown -->
+                <div 
+                    class="w-full"
+                    x-data="{
+                        weddingDate: new Date('2026-04-19T12:30:00'),
+                        now: new Date(),
+                        tick() {
+                            this.now = new Date();
+                        },
+                        get diff() {
+                            return this.weddingDate - this.now;
+                        },
+                        get isActive() {
+                            return this.diff <= 0;
+                        },
+                        get days() {
+                            return Math.floor(this.diff / (1000 * 60 * 60 * 24));
+                        },
+                        get hours() {
+                            return Math.floor((this.diff / (1000 * 60 * 60)) % 24);
+                        },
+                        get minutes() {
+                            return Math.floor((this.diff / (1000 * 60)) % 60);
+                        },
+                        get seconds() {
+                            return Math.floor((this.diff / 1000) % 60);
+                        }
+                    }"
+                    x-init="setInterval(() => tick(), 1000)"
                 >
-                    ΦΩΤΟΓΡΑΦΙΕΣ & ΒΙΝΤΕΟ
-                </a>
+                    <a 
+                        class="w-full flex items-center justify-center py-3 rounded-lg font-medium shadow transition bg-weddingButton text-weddingText hover:bg-weddingButtonHover"
+                        id="memories"
+                        :class="!isActive ? 'opacity-50 cursor-not-allowed' : ''"
+                        :href="isActive ? 'https://your-link-here.com' : '#'"
+                        :target="isActive ? '_blank' : ''"
+                    >
+                        <!-- ACTIVE -->
+                        <span x-show="isActive">
+                            ΦΩΤΟΓΡΑΦΙΕΣ & ΒΙΝΤΕΟ
+                        </span>
+
+                        <!-- COUNTDOWN -->
+                        <span x-show="!isActive">
+                            Διαθέσιμο σε 
+                            <span x-text="days"></span>η 
+                            <span x-text="hours"></span>ω 
+                            <span x-text="minutes"></span>λ 
+                            <span x-text="seconds"></span>δ
+                        </span>
+                    </a>
+                </div>
 
             </div>
 
