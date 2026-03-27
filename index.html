@@ -3,9 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Fotis & Aspa Wedding</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Custom Colors -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              weddingButton: '#AEB784',
+              weddingButtonHover: '#9DA46F',
+              weddingText: '#3E2C23',
+            }
+          }
+        }
+      }
+    </script>
 </head>
-<body>
-    <p>hello world</p>
+
+<body class="bg-gray-50 text-weddingText">
+
+    <!-- HERO -->
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6">
+
+        <p class="tracking-widest text-sm mb-2 text-weddingText">OUR WEDDING</p>
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-2 text-weddingText">ΦΩΤΗΣ & ΑΣΠΑ</h1>
+
+        <p class="text-lg md:text-xl mb-1 text-weddingText">19 Απρ 2026</p>
+
+        <p class="text-md md:text-lg mb-8 text-weddingText">ΚΤΗΜΑ ΚΛΕΟΠΑΤΡΑ</p>
+
+        <!-- BUTTONS -->
+        <div class="flex flex-col gap-4 w-full max-w-md">
+
+            <!-- RSVP -->
+            <a 
+                class="w-full py-3 rounded-lg font-medium shadow bg-weddingButton text-weddingText hover:bg-weddingButtonHover transition"
+                id="rsvp"
+                href="#"
+                target="_blank"
+            >
+                ΝΑΙ ΝΑΙ ΝΑΙ ΘΑ ΕΡΘΩ (RSVP)
+            </a>
+
+            <!-- LOCATION -->
+            <a 
+                class="w-full py-3 rounded-lg font-medium shadow bg-weddingButton text-weddingText hover:bg-weddingButtonHover transition"
+                id="location"
+                href="https://maps.app.goo.gl/g2fAXXB2CWkKJXZ98"
+                target="_blank"
+            >
+                ΠΟΥ ΘΑ ΜΑΣ ΒΡΕΙΣ
+            </a>
+
+            <!-- MEMORIES -->
+            <a 
+                class="w-full py-3 rounded-lg font-medium shadow bg-weddingButton text-weddingText hover:bg-weddingButtonHover transition"
+                id="memories"
+                href="#"
+                target="_blank"
+            >
+                ΠΕΙΣΤΗΡΙΑ ΔΙΑΣΚΕΔΑΣΗΣ
+            </a>
+
+        </div>
+
+    </section>
+
 </body>
 </html>
