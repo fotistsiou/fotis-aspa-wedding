@@ -19,73 +19,64 @@
             colors: {
               weddingButton: '#AEB784',
               weddingButtonHover: '#9DA46F',
-              weddingText: '#3E2C23',
+              weddingText: '#000000',
             }
           }
         }
       }
     </script>
+
+    <style>
+      /* REAL BACKGROUND LAYER */
+      .bg-layer {
+        position: fixed;
+        inset: 0;
+        background-image: url('images/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        opacity: 0.5;
+        z-index: -1;
+        pointer-events: none;
+      }
+    </style>
 </head>
 
-<body class="bg-gray-50 text-weddingText">
-    <div class="min-h-screen flex flex-col items-center justify-between">
-        <img 
-            class="w-auto h-20 md:h-24 object-contain"
+<body class="text-weddingText">
+
+    <!-- FIXED BACKGROUND -->
+    <div class="bg-layer"></div>
+
+    <div class="min-h-screen py-8 flex flex-col items-center justify-center mx-auto max-w-lg md:max-w-md w-full">
+
+        <!-- HEADER DECORATION -->
+        <!-- <img 
+            class="w-auto h-20 md:h-24 object-contain mt-4"
             src="images/header.png" 
             alt="header"
-        />
+        /> -->
 
-        <section class="flex flex-col items-center justify-center text-center px-6">
-            <p class="tracking-widest text-sm mb-2 text-weddingText">OUR WEDDING</p>
+        <!-- HERO -->
+        <section class="w-[80%] lg:w-fit flex flex-col items-center justify-center gap-4 text-center px-4 bg-white bg-opacity-70 rounded-lg py-8">
 
-            <img 
+            <p class="tracking-widest text-sm text-weddingText">OUR WEDDING</p>
+
+            <!-- <img 
                 src="images/logo.png" 
                 alt="Fotis & Aspa"
                 class="w-64 md:w-80 mb-4"
-            />
+            /> -->
 
-            <p class="tracking-widest text-md mb-2 text-weddingText">19 Απρ 2026 | 12:30 μμ</p>
+            <p class="tracking-widest text-xl font-bold text-weddingText">Φώτης & Άσπα</p>
+
+            <p class="tracking-widest text-md text-weddingText">19 Απρ 2026 | 12:30 μμ</p>
 
             <p class="tracking-widest text-md mb-4 text-weddingText">ΚΤΗΜΑ ΚΛΕΟΠΑΤΡΑ</p>
 
-            <div 
-                class="w-full"
-                x-data="{
-                    weddingDate: new Date('2026-04-19T12:30:00'),
-                    now: new Date(),
-                    tick() {
-                        this.now = new Date();
-                    },
-                    get diff() {
-                        return this.weddingDate - this.now;
-                    },
-                    get days() {
-                        return Math.floor(this.diff / (1000 * 60 * 60 * 24));
-                    },
-                    get hours() {
-                        return Math.floor((this.diff / (1000 * 60 * 60)) % 24);
-                    },
-                    get minutes() {
-                        return Math.floor((this.diff / (1000 * 60)) % 60);
-                    },
-                    get seconds() {
-                        return Math.floor((this.diff / 1000) % 60);
-                    }
-                }"
-                x-init="setInterval(() => tick(), 1000)"
-            >
-                <p class="w-full flex items-center justify-center py-3 rounded-lg font-medium text-weddingText">
-                    Countdown:
-                    <span x-text="days"></span>η 
-                    <span x-text="hours"></span>ω 
-                    <span x-text="minutes"></span>λ 
-                    <span x-text="seconds"></span>δ
-                </p>
-            </div>
-
+            <!-- BUTTONS -->
             <div class="flex flex-col gap-4 w-full max-w-md">
                 <a 
-                    class="w-full py-3 rounded-lg font-medium shadow bg-weddingButton text-weddingText hover:bg-weddingButtonHover transition"
+                    class="w-full py-3 rounded-lg font-medium shadow bg-weddingButton text-white hover:bg-weddingButtonHover transition"
                     id="rsvp"
                     href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAbB2mktUM1NHTUVNTTFOSUMxTVNaSElXRTRQQ0ozNy4u"
                     target="_blank"
@@ -94,7 +85,7 @@
                 </a>
 
                 <a 
-                    class="w-full py-3 rounded-lg font-medium shadow bg-weddingButton text-weddingText hover:bg-weddingButtonHover transition"
+                    class="w-full py-3 rounded-lg font-medium shadow bg-weddingButton text-white hover:bg-weddingButtonHover transition"
                     id="location"
                     href="https://maps.app.goo.gl/g2fAXXB2CWkKJXZ98"
                     target="_blank"
@@ -103,21 +94,43 @@
                 </a>
 
                 <a 
-                    class="w-full flex items-center justify-center py-3 rounded-lg font-medium shadow transition bg-weddingButton text-weddingText hover:bg-weddingButtonHover"
+                    class="w-full py-3 rounded-lg font-medium shadow bg-weddingButton text-white hover:bg-weddingButtonHover transition"
                     id="memories"
-                    href="https://your-link-here.com"
+                    href="#"
                     target="_blank"
                 >
                     ΦΩΤΟΓΡΑΦΙΕΣ & ΒΙΝΤΕΟ
                 </a>
             </div>
+
+            <div 
+                class="w-full flex items-center justify-center font-medium text-weddingText"
+                x-data="{
+                    weddingDate: new Date('2026-04-19T12:30:00'),
+                    now: new Date(),
+                    tick() { this.now = new Date() },
+                    get diff() { return this.weddingDate - this.now },
+                    get days() { return Math.floor(this.diff / (1000*60*60*24)) },
+                    get hours() { return Math.floor((this.diff / (1000*60*60)) % 24) },
+                    get minutes() { return Math.floor((this.diff / (1000*60)) % 60) },
+                    get seconds() { return Math.floor((this.diff / 1000) % 60) }
+                }"
+                x-init="setInterval(() => tick(), 1000)"
+            >
+                <span>Countdown:</span>
+                <p class="w-8 text-right"><span x-text="days"></span>η</p> 
+                <p class="w-8 text-right"><span x-text="hours"></span>ω</p>
+                <p class="w-8 text-right"><span x-text="minutes"></span>λ</p>
+                <p class="w-8 text-right"><span x-text="seconds"></span>δ</p>
+            </div>
         </section>
 
-        <img 
-            class="w-auto h-20 md:h-24 object-contain"
+        <!-- FOOTER DECORATION -->
+        <!-- <img 
+            class="w-auto h-20 md:h-24 object-contain mb-4"
             src="images/footer.png" 
             alt="footer"
-        />
+        /> -->
     </div>
 </body>
 </html>
