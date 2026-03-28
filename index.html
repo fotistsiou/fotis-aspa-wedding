@@ -11,11 +11,18 @@
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Noto+Serif+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
     <!-- Tailwind Custom Colors -->
     <script>
       tailwind.config = {
         theme: {
           extend: {
+            fontFamily: {
+              body: ['Manrope', 'sans-serif'],
+              wedding: ['Great Vibes', 'cursive']
+            },
             colors: {
               weddingButton: '#AEB784',
               weddingButtonHover: '#9DA46F',
@@ -42,38 +49,21 @@
     </style>
 </head>
 
-<body class="text-weddingText">
-
+<body class="text-weddingText font-body">
     <!-- FIXED BACKGROUND -->
     <div class="bg-layer"></div>
 
     <div class="min-h-screen py-8 flex flex-col items-center justify-center mx-auto max-w-lg md:max-w-md w-full">
-
-        <!-- HEADER DECORATION -->
-        <!-- <img 
-            class="w-auto h-20 md:h-24 object-contain mt-4"
-            src="images/header.png" 
-            alt="header"
-        /> -->
-
-        <!-- HERO -->
         <section class="w-[80%] lg:w-fit flex flex-col items-center justify-center gap-4 text-center px-4 bg-white bg-opacity-70 rounded-lg py-8">
 
             <p class="tracking-widest text-sm text-weddingText">OUR WEDDING</p>
 
-            <!-- <img 
-                src="images/logo.png" 
-                alt="Fotis & Aspa"
-                class="w-64 md:w-80 mb-4"
-            /> -->
-
-            <p class="tracking-widest text-xl font-bold text-weddingText">Φώτης & Άσπα</p>
+            <p class="tracking-widest text-xl text-weddingText font-medium font-wedding">Φώτης & Άσπα</p>
 
             <p class="tracking-widest text-md text-weddingText">19 Απρ 2026 | 12:30 μμ</p>
 
-            <p class="tracking-widest text-md mb-4 text-weddingText">ΚΤΗΜΑ ΚΛΕΟΠΑΤΡΑ</p>
+            <p class="tracking-widest text-md mb-4 text-weddingText font_regular">ΚΤΗΜΑ ΚΛΕΟΠΑΤΡΑ</p>
 
-            <!-- BUTTONS -->
             <div class="flex flex-col gap-4 w-full max-w-md">
                 <a 
                     class="w-full py-3 rounded-lg font-medium shadow bg-weddingButton text-white hover:bg-weddingButtonHover transition"
@@ -124,13 +114,6 @@
                 <p class="ml-2"><span x-text="seconds"></span>s</p>
             </div>
         </section>
-
-        <!-- FOOTER DECORATION -->
-        <!-- <img 
-            class="w-auto h-20 md:h-24 object-contain mb-4"
-            src="images/footer.png" 
-            alt="footer"
-        /> -->
     </div>
 </body>
 </html>
