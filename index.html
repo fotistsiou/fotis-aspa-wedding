@@ -112,6 +112,7 @@
                     }"
                     x-init="setInterval(() => tick(), 1000)"
                 >
+
                     <template x-if="finished">
                         <p class="text-lg font-semibold">Η μέρα μας έφτασε!</p>
                     </template>
@@ -121,32 +122,31 @@
                             <span>Countdown:</span>
 
                             <template x-if="days > 0">
-                                <p class="ml-2 w-7 text-center font-mono">
+                                <p class="ml-2 inline-block w-8 text-center">
                                     <span x-text="pad(days)"></span>d
                                 </p>
                             </template>
 
                             <template x-if="hours > 0 || days > 0">
-                                <p class="ml-2 w-7 text-center font-mono">
+                                <p class="ml-2 inline-block w-8 text-center">
                                     <span x-text="pad(hours)"></span>h
                                 </p>
                             </template>
 
                             <template x-if="minutes > 0 || hours > 0 || days > 0">
-                                <p class="ml-2 w-7 text-center font-mono">
+                                <p class="ml-2 inline-block w-8 text-center">
                                     <span x-text="pad(minutes)"></span>m
                                 </p>
                             </template>
 
                             <template x-if="seconds >= 0">
-                                <p class="ml-2 w-7 text-center font-mono">
+                                <p class="ml-2 inline-block w-8 text-center">
                                     <span x-text="pad(seconds)"></span>s
                                 </p>
                             </template>
                         </div>
                     </template>
                 </div>
-
             </section>
         </div>
     </div>
