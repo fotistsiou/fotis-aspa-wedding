@@ -29,20 +29,15 @@
 
 <body class="bg-gray-50 text-weddingText">
     <div class="min-h-screen flex flex-col items-center justify-between">
-
-        <!-- HEADER DECORATION -->
         <img 
             class="w-auto h-20 md:h-24 object-contain"
             src="images/header.png" 
             alt="header"
         />
 
-        <!-- HERO -->
         <section class="flex flex-col items-center justify-center text-center px-6">
-
             <p class="tracking-widest text-sm mb-2 text-weddingText">OUR WEDDING</p>
 
-            <!-- IMAGE INSTEAD OF TEXT -->
             <img 
                 src="images/logo.png" 
                 alt="Fotis & Aspa"
@@ -53,10 +48,42 @@
 
             <p class="tracking-widest text-md mb-4 text-weddingText">ΚΤΗΜΑ ΚΛΕΟΠΑΤΡΑ</p>
 
-            <!-- BUTTONS -->
-            <div class="flex flex-col gap-4 w-full max-w-md">
+            <div 
+                class="w-full"
+                x-data="{
+                    weddingDate: new Date('2026-04-19T12:30:00'),
+                    now: new Date(),
+                    tick() {
+                        this.now = new Date();
+                    },
+                    get diff() {
+                        return this.weddingDate - this.now;
+                    },
+                    get days() {
+                        return Math.floor(this.diff / (1000 * 60 * 60 * 24));
+                    },
+                    get hours() {
+                        return Math.floor((this.diff / (1000 * 60 * 60)) % 24);
+                    },
+                    get minutes() {
+                        return Math.floor((this.diff / (1000 * 60)) % 60);
+                    },
+                    get seconds() {
+                        return Math.floor((this.diff / 1000) % 60);
+                    }
+                }"
+                x-init="setInterval(() => tick(), 1000)"
+            >
+                <p class="w-full flex items-center justify-center py-3 rounded-lg font-medium text-weddingText">
+                    Countdown:
+                    <span x-text="days"></span>η 
+                    <span x-text="hours"></span>ω 
+                    <span x-text="minutes"></span>λ 
+                    <span x-text="seconds"></span>δ
+                </p>
+            </div>
 
-                <!-- RSVP -->
+            <div class="flex flex-col gap-4 w-full max-w-md">
                 <a 
                     class="w-full py-3 rounded-lg font-medium shadow bg-weddingButton text-weddingText hover:bg-weddingButtonHover transition"
                     id="rsvp"
@@ -66,7 +93,6 @@
                     ΘΑ ΠΑΡΕΥΡΕΘΩ (RSVP)
                 </a>
 
-                <!-- LOCATION -->
                 <a 
                     class="w-full py-3 rounded-lg font-medium shadow bg-weddingButton text-weddingText hover:bg-weddingButtonHover transition"
                     id="location"
@@ -76,64 +102,17 @@
                     ΤΟΠΟΘΕΣΙΑ
                 </a>
 
-                <!-- MEMORIES with countdown -->
-                <div 
-                    class="w-full"
-                    x-data="{
-                        weddingDate: new Date('2026-04-19T12:30:00'),
-                        now: new Date(),
-                        tick() {
-                            this.now = new Date();
-                        },
-                        get diff() {
-                            return this.weddingDate - this.now;
-                        },
-                        get isActive() {
-                            return this.diff <= 0;
-                        },
-                        get days() {
-                            return Math.floor(this.diff / (1000 * 60 * 60 * 24));
-                        },
-                        get hours() {
-                            return Math.floor((this.diff / (1000 * 60 * 60)) % 24);
-                        },
-                        get minutes() {
-                            return Math.floor((this.diff / (1000 * 60)) % 60);
-                        },
-                        get seconds() {
-                            return Math.floor((this.diff / 1000) % 60);
-                        }
-                    }"
-                    x-init="setInterval(() => tick(), 1000)"
+                <a 
+                    class="w-full flex items-center justify-center py-3 rounded-lg font-medium shadow transition bg-weddingButton text-weddingText hover:bg-weddingButtonHover"
+                    id="memories"
+                    href="https://your-link-here.com"
+                    target="_blank"
                 >
-                    <a 
-                        class="w-full flex items-center justify-center py-3 rounded-lg font-medium shadow transition bg-weddingButton text-weddingText hover:bg-weddingButtonHover"
-                        id="memories"
-                        :class="!isActive ? 'opacity-50 cursor-not-allowed' : ''"
-                        :href="isActive ? 'https://your-link-here.com' : '#'"
-                        :target="isActive ? '_blank' : ''"
-                    >
-                        <!-- ACTIVE -->
-                        <span x-show="isActive">
-                            ΦΩΤΟΓΡΑΦΙΕΣ & ΒΙΝΤΕΟ
-                        </span>
-
-                        <!-- COUNTDOWN -->
-                        <span x-show="!isActive">
-                            Διαθέσιμο σε 
-                            <span x-text="days"></span>η 
-                            <span x-text="hours"></span>ω 
-                            <span x-text="minutes"></span>λ 
-                            <span x-text="seconds"></span>δ
-                        </span>
-                    </a>
-                </div>
-
+                    ΦΩΤΟΓΡΑΦΙΕΣ & ΒΙΝΤΕΟ
+                </a>
             </div>
-
         </section>
 
-        <!-- FOOTER DECORATION -->
         <img 
             class="w-auto h-20 md:h-24 object-contain"
             src="images/footer.png" 
