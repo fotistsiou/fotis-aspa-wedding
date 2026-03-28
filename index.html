@@ -29,84 +29,126 @@
     </script>
 
     <style>
-      .bg-layer {
-        position: fixed;
-        inset: 0;
-        background-image: url('images/background.jpg');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        z-index: -1;
-        pointer-events: none;
-      }
+        .mobile-frame {
+            width: 500px;
+            max-width: 100%;
+            margin: 0 auto;
+            background-image: url('images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+        }
+
+        body {
+            background: linear-gradient(
+                180deg,
+                #F7C8B0 0%,
+                #F4B6C2 50%,
+                #F7E8A4 75%
+            );
+        }
     </style>
 </head>
 
 <body class="text-weddingText font-body">
-    <!-- FIXED BACKGROUND -->
-    <div class="bg-layer"></div>
+    <div class="mobile-frame shadow-xl">
+        <div class="min-h-screen py-8 flex flex-col items-center justify-center mx-auto max-w-lg md:max-w-md w-full font-regular">
+            <section class="w-[80%] flex flex-col items-center justify-center gap-4 text-center px-4 bg-white bg-opacity-80 rounded-lg py-8">
 
-    <div class="min-h-screen py-8 flex flex-col items-center justify-center mx-auto max-w-lg md:max-w-md w-full font-regular">
-        <section class="w-[80%] lg:w-fit flex flex-col items-center justify-center gap-4 text-center px-4 bg-white bg-opacity-80 rounded-lg py-8">
+                <p class="tracking-widest text-sm text-weddingText">OUR WEDDING</p>
 
-            <p class="tracking-widest text-sm text-weddingText">OUR WEDDING</p>
+                <p class="tracking-widest text-xl text-weddingText font-wedding">Φώτης & Άσπα</p>
 
-            <p class="tracking-widest text-xl text-weddingText font-wedding">Φώτης & Άσπα</p>
+                <p class="tracking-widest text-md text-weddingText">19 Απρ 2026 | 12:30 μμ</p>
 
-            <p class="tracking-widest text-md text-weddingText">19 Απρ 2026 | 12:30 μμ</p>
+                <p class="tracking-widest text-md mb-4 text-weddingText font_regular">ΚΤΗΜΑ ΚΛΕΟΠΑΤΡΑ</p>
 
-            <p class="tracking-widest text-md mb-4 text-weddingText font_regular">ΚΤΗΜΑ ΚΛΕΟΠΑΤΡΑ</p>
+                <div class="flex flex-col gap-4 w-full max-w-md">
+                    <a 
+                        class="w-full py-3 rounded-lg shadow bg-weddingPeach text-weddingText hover:opacity-90 transition"
+                        id="rsvp"
+                        href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAbB2mktUM1NHTUVNTTFOSUMxTVNaSElXRTRQQ0ozNy4u"
+                        target="_blank"
+                    >
+                        ΘΑ ΠΑΡΕΥΡΕΘΩ (RSVP)
+                    </a>
 
-            <div class="flex flex-col gap-4 w-full max-w-md">
-                <a 
-                    class="w-full py-3 rounded-lg shadow bg-weddingPeach text-weddingText hover:opacity-90 transition"
-                    id="rsvp"
-                    href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAbB2mktUM1NHTUVNTTFOSUMxTVNaSElXRTRQQ0ozNy4u"
-                    target="_blank"
+                    <a 
+                        class="w-full py-3 rounded-lg shadow bg-weddingPink text-weddingText hover:opacity-90 transition"
+                        id="location"
+                        href="https://maps.app.goo.gl/g2fAXXB2CWkKJXZ98"
+                        target="_blank"
+                    >
+                        ΤΟΠΟΘΕΣΙΑ
+                    </a>
+
+                    <a 
+                        class="w-full py-3 rounded-lg shadow bg-weddingYellow text-weddingText hover:opacity-90 transition"
+                        id="memories"
+                        href="#"
+                        target="_blank"
+                    >
+                        ΦΩΤΟΓΡΑΦΙΕΣ & ΒΙΝΤΕΟ
+                    </a>
+                </div>
+
+                <div 
+                    class="w-full flex items-center justify-center text-weddingText"
+                    x-data="{
+                        weddingDate: new Date('2026-04-19T12:30:00'),
+                        now: new Date(),
+                        tick() { this.now = new Date() },
+                        get diff() { return this.weddingDate - this.now },
+
+                        pad(n) { return String(n).padStart(2, '0') },
+
+                        get days() { return Math.floor(this.diff / (1000*60*60*24)) },
+                        get hours() { return Math.floor((this.diff / (1000*60*60)) % 24) },
+                        get minutes() { return Math.floor((this.diff / (1000*60)) % 60) },
+                        get seconds() { return Math.floor((this.diff / 1000) % 60) },
+
+                        get finished() { return this.diff <= 0 }
+                    }"
+                    x-init="setInterval(() => tick(), 1000)"
                 >
-                    ΘΑ ΠΑΡΕΥΡΕΘΩ (RSVP)
-                </a>
+                    <template x-if="finished">
+                        <p class="text-lg font-semibold">Η μέρα μας έφτασε!</p>
+                    </template>
 
-                <a 
-                    class="w-full py-3 rounded-lg shadow bg-weddingPink text-weddingText hover:opacity-90 transition"
-                    id="location"
-                    href="https://maps.app.goo.gl/g2fAXXB2CWkKJXZ98"
-                    target="_blank"
-                >
-                    ΤΟΠΟΘΕΣΙΑ
-                </a>
+                    <template x-if="!finished">
+                        <div class="flex items-center">
+                            <span>Countdown:</span>
 
-                <a 
-                    class="w-full py-3 rounded-lg shadow bg-weddingYellow text-weddingText hover:opacity-90 transition"
-                    id="memories"
-                    href="#"
-                    target="_blank"
-                >
-                    ΦΩΤΟΓΡΑΦΙΕΣ & ΒΙΝΤΕΟ
-                </a>
-            </div>
+                            <template x-if="days > 0">
+                                <p class="ml-2 w-7 text-center font-mono">
+                                    <span x-text="pad(days)"></span>d
+                                </p>
+                            </template>
 
-            <div 
-                class="w-full flex items-center justify-center text-weddingText"
-                x-data="{
-                    weddingDate: new Date('2026-04-19T12:30:00'),
-                    now: new Date(),
-                    tick() { this.now = new Date() },
-                    get diff() { return this.weddingDate - this.now },
-                    get days() { return Math.floor(this.diff / (1000*60*60*24)) },
-                    get hours() { return Math.floor((this.diff / (1000*60*60)) % 24) },
-                    get minutes() { return Math.floor((this.diff / (1000*60)) % 60) },
-                    get seconds() { return Math.floor((this.diff / 1000) % 60) }
-                }"
-                x-init="setInterval(() => tick(), 1000)"
-            >
-                <span>Countdown:</span>
-                <p class="ml-2"><span x-text="days"></span>d</p> 
-                <p class="ml-2"><span x-text="hours"></span>h</p>
-                <p class="ml-2"><span x-text="minutes"></span>m</p>
-                <p class="ml-2"><span x-text="seconds"></span>s</p>
-            </div>
-        </section>
+                            <template x-if="hours > 0 || days > 0">
+                                <p class="ml-2 w-7 text-center font-mono">
+                                    <span x-text="pad(hours)"></span>h
+                                </p>
+                            </template>
+
+                            <template x-if="minutes > 0 || hours > 0 || days > 0">
+                                <p class="ml-2 w-7 text-center font-mono">
+                                    <span x-text="pad(minutes)"></span>m
+                                </p>
+                            </template>
+
+                            <template x-if="seconds >= 0">
+                                <p class="ml-2 w-7 text-center font-mono">
+                                    <span x-text="pad(seconds)"></span>s
+                                </p>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+
+            </section>
+        </div>
     </div>
 </body>
 </html>
