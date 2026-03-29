@@ -19,9 +19,6 @@
                         wedding: ['Great Vibes', 'cursive']
                     },
                     colors: {
-                        weddingPeach: '#F7C8B0',
-                        weddingPink: '#F4B6C2',
-                        weddingYellow: '#F7E8A4',
                         weddingText: '#000000',
                         weddingButton: '#AEB784',
                     }
@@ -43,12 +40,6 @@
         }
 
         body {
-            /* background: linear-gradient(
-                180deg,
-                #F7C8B0 0%,
-                #F4B6C2 50%,
-                #F7E8A4 75%
-            ); */
             background: linear-gradient(
                 180deg,
                 #AEB784 0%,
@@ -60,7 +51,11 @@
 
 <body class="text-weddingText font-body">
     <div class="mobile-frame shadow-xl">
-        <div class="min-h-screen py-8 flex flex-col items-center justify-center mx-auto max-w-lg md:max-w-md w-full font-regular">
+        <div 
+            class="min-h-screen py-8 flex flex-col items-center justify-center mx-auto max-w-lg md:max-w-md w-full font-regular"
+            x-data="weddingState"
+            x-init="init()"
+        >
             <section class="w-[80%] flex flex-col items-center justify-center gap-4 text-center px-4 bg-white bg-opacity-80 rounded-lg py-8">
 
                 <p class="tracking-widest text-sm text-weddingText">OUR WEDDING</p>
@@ -91,37 +86,23 @@
                     </a>
 
                     <a 
-                        class="w-full py-3 rounded-lg shadow bg-weddingButton text-weddingText hover:opacity-90 transition"
+                        class="w-full py-3 rounded-lg shadow bg-weddingButton text-weddingText transition"
                         id="memories"
                         href="https://www.dropbox.com/request/QkvUa8zUCOSqYpQyrVaJ"
                         target="_blank"
+                        :class="memoriesUnlocked ? 'opacity-100 cursor-pointer' : 'opacity-60 cursor-not-allowed'"
+                        :aria-disabled="!memoriesUnlocked"
+                        :tabindex="memoriesUnlocked ? '0' : '-1'"
+                        @click.prevent="if (!memoriesUnlocked) return; window.open($el.href, '_blank')"
                     >
                         ΦΩΤΟΓΡΑΦΙΕΣ & ΒΙΝΤΕΟ
                     </a>
                 </div>
 
-                <div 
-                    class="w-full flex items-center justify-center text-weddingText"
-                    x-data="{
-                        weddingDate: new Date('2026-04-19T12:30:00'),
-                        now: new Date(),
-                        tick() { this.now = new Date() },
-                        get diff() { return this.weddingDate - this.now },
-
-                        pad(n) { return String(n).padStart(2, '0') },
-
-                        get days() { return Math.floor(this.diff / (1000*60*60*24)) },
-                        get hours() { return Math.floor((this.diff / (1000*60*60)) % 24) },
-                        get minutes() { return Math.floor((this.diff / (1000*60)) % 60) },
-                        get seconds() { return Math.floor((this.diff / 1000) % 60) },
-
-                        get finished() { return this.diff <= 0 }
-                    }"
-                    x-init="setInterval(() => tick(), 1000)"
-                >
+                <div class="w-full flex items-center justify-center text-weddingText">
 
                     <template x-if="finished">
-                        <p class="text-md font-semibold">Η μέρα μας του γάμου μας έφτασε!</p>
+                        <p class="text-md font-semibold">Η μέρα του γάμου μας έφτασε!</p>
                     </template>
 
                     <template x-if="!finished">
@@ -157,5 +138,34 @@
             </section>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('weddingState', () => ({
+                eventDate: new Date('2026-04-19T12:30:00'),
+                now: new Date(),
+                memoriesUnlocked: false,
+
+                init() {
+                    this.update()
+                    setInterval(() => this.update(), 1000)
+                },
+
+                update() {
+                    this.now = new Date()
+                    this.memoriesUnlocked = this.now >= this.eventDate
+                },
+
+                get diff() { return this.eventDate - this.now },
+                pad(n) { return String(n).padStart(2, '0') },
+                get days() { return Math.floor(this.diff / (1000*60*60*24)) },
+                get hours() { return Math.floor((this.diff / (1000*60*60)) % 24) },
+                get minutes() { return Math.floor((this.diff / (1000*60)) % 60) },
+                get seconds() { return Math.floor((this.diff / 1000) % 60) },
+                get finished() { return this.diff <= 0 },
+            }))
+        })
+    </script>
+
 </body>
 </html>
