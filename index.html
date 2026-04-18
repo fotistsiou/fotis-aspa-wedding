@@ -70,17 +70,6 @@
                     <template x-if="!finished">
                         <a 
                             class="w-full py-3 rounded-lg shadow bg-weddingButton text-weddingText hover:opacity-90 transition"
-                            id="rsvp"
-                            href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAbB2mktUM1NHTUVNTTFOSUMxTVNaSElXRTRQQ0ozNy4u"
-                            target="_blank"
-                        >
-                            ΘΑ ΠΑΡΕΥΡΕΘΩ (RSVP)
-                        </a>
-                    </template>
-
-                    <template x-if="!finished">
-                        <a 
-                            class="w-full py-3 rounded-lg shadow bg-weddingButton text-weddingText hover:opacity-90 transition"
                             id="location"
                             href="https://maps.app.goo.gl/g2fAXXB2CWkKJXZ98"
                             target="_blank"
@@ -90,14 +79,10 @@
                     </template>
 
                     <a 
-                        class="w-full py-3 rounded-lg shadow bg-weddingButton text-weddingText transition"
+                        class="w-full py-3 rounded-lg shadow bg-weddingButton text-weddingText transition cursor-pointer"
                         id="memories"
                         href="https://www.dropbox.com/request/QkvUa8zUCOSqYpQyrVaJ"
-                        target="_blank"
-                        :class="finished ? 'opacity-100 cursor-pointer' : 'opacity-60 cursor-not-allowed'"
-                        :aria-disabled="!finished"
-                        :tabindex="finished ? '0' : '-1'"
-                        @click.prevent="if (!finished) return; window.open($el.href, '_blank')"
+                        target="_blank"               
                     >
                         ΦΩΤΟΓΡΑΦΙΕΣ & ΒΙΝΤΕΟ
                     </a>
